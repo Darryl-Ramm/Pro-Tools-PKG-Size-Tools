@@ -1,5 +1,12 @@
 # rx.sh, pt_unpack.sh, pt_sizes.sh
 
+[![Latest Release](https://img.shields.io/github/v/release/Darryl-Ramm/repackage_pro_tools?include_prereleases&sort=semver)](https://github.com/Darryl-Ramm/repackage_pro_tools.sh/releases/latest)
+
+[![Latest Release](https://img.shields.io/github/v/release/Darryl-Ramm/Pro-Tools-PKG-Size-Tools?include_prereleases&sort=semver)]
+(https://github.com/Darryl-Ramm/Pro-Tools-PKG-Size-Tools/releases/latest)
+
+https://github.com/Darryl-Ramm/Pro-Tools-PKG-Size-Tools/edit/main/README.md
+
 Three macOS bash utilities for taking apart an Avid Pro Tools macOS installer
 without being afraid of what you are doing as root.
 
