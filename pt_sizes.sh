@@ -58,12 +58,10 @@ fi
 # Results from the last list_sizes call, all in KB.
 list_xml_kb=0
 list_du_kb=0
-list_res_kb=0
 
 # Running totals for the Scripts .pkg, all in KB.
 total_xml_kb=0
 total_du_kb=0
-total_res_kb=0
 
 # Number of directories du could not fully read, which means sizes are low.
 unreadable_count=0
@@ -190,15 +188,14 @@ function dir_kb {
 
 
 # Print the table of sizes for one Distribution or PackageInfo file and leave
-# the KB totals in list_xml_kb, list_du_kb and list_res_kb.
+# the KB totals in list_xml_kb, and list_du_kb
 function list_sizes {
     local dist="$1"
-    local n i root parent resdir
-    local -a sizes ids names paydirs du_payload du_resources
+    local n i root parent
+    local -a sizes ids names paydirs du_payload
 
     list_xml_kb=0
     list_du_kb=0
-    list_res_kb=0
 
     parent="$(dirname "${dist}")"
     root="$(xmllint --xpath 'name(/*)' "${dist}" 2>/dev/null)"
@@ -234,11 +231,8 @@ function list_sizes {
     echo '-------------  -----------  --------------------------------------------------  -----------------------------------------'
 
     for ((i = 1; i <= n; i++)); do
-        resdir="${paydirs[i]%/Payload}/Resources"
 
         du_payload[i]=$(dir_kb "${paydirs[i]}") ||
-            unreadable_count=$((unreadable_count + 1))
-        du_resources[i]=$(dir_kb "${resdir}") ||
             unreadable_count=$((unreadable_count + 1))
 
         printf '  %8.2f MB  %8.2f MB  %-50s  %s\n' \
@@ -255,7 +249,6 @@ function list_sizes {
     else
         list_xml_kb=$(sum_array "${sizes[@]}")
         list_du_kb=$(sum_array "${du_payload[@]}")
-        list_res_kb=$(sum_array "${du_resources[@]}")
     fi
 
     if [[ ${n} -gt 1 ]]; then
@@ -378,13 +371,11 @@ for dir in "${scripts_dir}/"*_expand; do
 
     total_xml_kb=$((total_xml_kb + list_xml_kb))
     total_du_kb=$((total_du_kb + list_du_kb))
-    total_res_kb=$((total_res_kb + list_res_kb))
 done
 
-printf '  %8.2f MB  %8.2f MB   %8.2f MB  SCRIPTS .PKG TOTAL\n' \
+printf '  %8.2f MB  %8.2f MB  SCRIPTS .PKG TOTAL\n' \
     "$(kb_to_MB "${total_xml_kb}")" \
-    "$(kb_to_MB "${total_du_kb}")" \
-    "$(kb_to_MB "${total_res_kb}")"
+    "$(kb_to_MB "${total_du_kb}")"
 echo ""
 
 #
