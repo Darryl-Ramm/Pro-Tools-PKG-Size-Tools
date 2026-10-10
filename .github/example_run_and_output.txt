@@ -1,3 +1,4 @@
+$
 $ # First we run pt_unpack.sh as root in a sandbox provided by rx.sh
 $
 $ ./rx.sh /tmp/work ./pt_unpack.sh ../dmgs/Pro_Tools_26.4.1_Mac.dmg
@@ -23,6 +24,7 @@ Embedded .pkg files: 8 found, 0 failed to expand
 + hdiutil detach /private/tmp/work/mount -quiet
 $
 $ # now run the pt_sizes.sh utility on the packages we unpacked....
+$
 $ ./pt_sizes.sh /tmp/work
 /tmp/work/clone/Distribution
 installKBytes   du Payload  id                                                  name
