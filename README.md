@@ -201,7 +201,8 @@ Options: `-h` prints help, `-v` prints the version.
 
 Each script carries a `@@VERSION@@` placeholder that is replaced with the git
 tag when the tarball is built. A copy taken straight from the repository
-reports `@@VERSION@@` for `-v`.
+reports `@@VERSION@@` for `-v`. Unfortunately currently all .sh files share
+the same git tag versions. 
 
 ## License
 
