@@ -1,0 +1,89 @@
+$ # First we run pt_unpack.sh as root in a sandbox provided by rx.sh
+$
+$ ./rx.sh /tmp/work ./pt_unpack.sh ../dmgs/Pro_Tools_26.4.1_Mac.dmg
+Setting up sandbox directory: /private/tmp/work to run command: /Users/darryl2/src/pt_unpack.sh ../dmgs/Pro_Tools_26.4.1_Mac.dmg
+To launch the sandbox able to run root privilege commands sudo will ask for your password:
+Password:
++ rm -rf /private/tmp/work/expand /private/tmp/work/clone
++ mkdir -p /private/tmp/work/mount
++ hdiutil attach /Users/darryl2/dmgs/Pro_Tools_26.4.1_Mac.dmg -mountpoint /private/tmp/work/mount -nobrowse -readonly -quiet
++ pkgutil --expand-full /private/tmp/work/mount/Install\ Pro\ Tools\ 2026.4.1.pkg /private/tmp/work/expand
++ cp -c -R -p /private/tmp/work/expand/ /private/tmp/work/clone
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Payload/tmp/PACE/LicenseSupport.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Payload/tmp/PACE/LicenseSupport.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/AvidLink_Installer.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/AvidLink_Installer.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Install\ PitchControl.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Install\ PitchControl.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/SoundFlowProTools.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/SoundFlowProTools.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Melodyne.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Melodyne.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/SpliceProTools.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/SpliceProTools.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Install\ VelocityControl.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Install\ VelocityControl.pkg_expand
++ pkgutil --expand-full /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Install\ NoteStack.pkg /private/tmp/work/clone/Pro\ Tools\ Application.pkg/Scripts/Install\ NoteStack.pkg_expand
+Expanded installer:  /private/tmp/work/expand
+Editable clone:      /private/tmp/work/clone
+Embedded .pkg files: 8 found, 0 failed to expand
++ hdiutil detach /private/tmp/work/mount -quiet
+$
+$ # now run the pt_sizes.sh utility on the packages we unpacked....
+$ ./pt_sizes.sh /tmp/work
+/tmp/work/clone/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+      0.00 MB      0.00 MB  com.avid.installer.osx.ProToolsApplicationAppMan    Pro Tools AppMan.pkg
+      0.00 MB      0.00 MB  com.avid.installer.osx.ProToolsApplicationAppMan    Pro Tools AppMan.pkg
+   9603.81 MB   9880.15 MB  com.avid.installer.osx.ProToolsApplication          Pro Tools Application.pkg
+      0.30 MB      0.30 MB  com.avid.installer.osx.audio.bridge                 Pro Tools Audio Bridge.pkg
+   9604.12 MB   9880.46 MB  TOTAL
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/AvidLink_Installer.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+    320.93 MB    320.93 MB  com.avid.avidlink.component.pkg                     avidlink_component.pkg
+      1.57 MB      1.57 MB  com.avid.avidlink.uninstaller.pkg                   Avid Link Uninstaller.pkg
+    322.50 MB    322.50 MB  TOTAL
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/Install NoteStack.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+     23.22 MB     23.22 MB  com.avid.installer.osx.NoteStackPlugInAAX           NoteStack AAX.pkg
+      0.00 MB      0.00 MB  com.avid.installer.osx.NoteStackAppMan              NoteStack AppMan.pkg
+     23.23 MB     23.23 MB  TOTAL
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/Install PitchControl.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+     18.04 MB     18.04 MB  com.avid.installer.osx.PitchControlPlugInAAX        PitchControl AAX.pkg
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/Install VelocityControl.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+     18.11 MB     18.11 MB  com.avid.installer.osx.VelocityControlPlugInAAX     VelocityControl AAX.pkg
+      0.00 MB      0.00 MB  com.avid.installer.osx.VelocityControlAppMan        VelocityControl AppMan.pkg
+     18.11 MB     18.11 MB  TOTAL
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/Melodyne.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+    225.87 MB    225.87 MB  com.celemony.melodyne.standalone                    com.celemony.melodyne.standalone.pkg
+      0.79 MB      0.79 MB  com.celemony.melodyne.aax                           com.celemony.melodyne.aax.pkg
+      0.49 MB      0.49 MB  com.celemony.melodyne.au                            com.celemony.melodyne.au.pkg
+      0.48 MB      0.49 MB  com.celemony.melodyne.vst3                          com.celemony.melodyne.vst3.pkg
+    227.63 MB    227.64 MB  TOTAL
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/SoundFlowProTools.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+    911.50 MB    911.50 MB  org.soundflow.sfsx                                  SFComponentHeadless.pkg
+
+/tmp/work/clone/Pro Tools Application.pkg/Scripts/SpliceProTools.pkg_expand/PackageInfo
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+     57.87 MB     57.87 MB  com.splice.pro-tools-integration                    SpliceProTools.pkg
+
+   1578.87 MB   1578.88 MB       0.00 MB  SCRIPTS .PKG TOTAL
+
+/tmp/work/clone/Pro Tools Application.pkg/Payload/tmp/PACE/LicenseSupport.pkg_expand/Distribution
+installKBytes   du Payload  id                                                  name
+-------------  -----------  --------------------------------------------------  -----------------------------------------
+     92.59 MB     92.61 MB  com.paceap.pkg.eden.licensed                        License_Service.pkg
+     83.36 MB     83.49 MB  com.paceap.pkg.eden.iLokLicenseManager              iLok_License_Manager.pkg
+     99.40 MB     99.45 MB  com.paceap.pkg.eden.activationexperience            Activation_Experience.pkg
+    275.36 MB    275.55 MB  TOTAL
