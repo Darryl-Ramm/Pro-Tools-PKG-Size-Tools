@@ -184,8 +184,7 @@ prints a table with, for each package:
 * **du Payload**: the apparent size of the expanded Payload directory
   (`du -A`), as a sanity check on `installKBytes`
 
-The `SCRIPTS .PKG TOTAL` line sums the installers in `Scripts`, with a third
-value for the total size of their `Resources` directories.
+The `SCRIPTS .PKG TOTAL` line sums the installers in `Scripts`.
 
 The reason for the extra detail: the installKBytes in the root Distribution
 file is what sets the space required message users see, but Pro Tools also
