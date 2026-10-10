@@ -344,11 +344,14 @@ fi
 # Pro Tools Application.pkg
 #
 
-if [[ ! -f "${CLONE_DIR}/Distribution" ]]; then
-    die "${CLONE_DIR}/Distribution is missing"
+xml="${CLONE_DIR}/Distribution"
+
+if [[ ! -f "${xml}" ]]; then
+    die "${xml} is missing"
 fi
 
-list_sizes "${CLONE_DIR}/Distribution"
+echo "${b}${xml}${o}"
+list_sizes "${xml}"
 
 #
 # All the .pkg in Pro Tools Application.pkg/Scripts, including nested .pkg
